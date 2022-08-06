@@ -13,9 +13,6 @@ export const HomePage = () => {
       <Link to={"/recipes"}>
         <h2>Click here to search for a recipe</h2>
       </Link>
-      <div className="home-footer">
-        <p>&copy; Lachlan Bardwell 2022</p>
-      </div>
     </div>
   );
 };

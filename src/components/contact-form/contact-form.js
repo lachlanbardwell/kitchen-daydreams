@@ -13,7 +13,8 @@ export const ContactForm = () => {
   return (
     <div>
       <TextField
-        placeholder="Tell us what you think"
+        type="text"
+        placeholder="Send us an email"
         value={feedback}
         onChange={(e) => setFeedback(e.target.value)}
       ></TextField>

@@ -20,8 +20,8 @@ export const RecipeDisplay = (props) => {
               columnSpacing={8}
               border="solid 1px black"
               padding="30px"
-              onMouseEnter={() => console.log("here")}
-              onMouseLeave={() => console.log("leave")}
+              // onMouseEnter={() => console.log("here")}
+              // onMouseLeave={() => console.log("leave")}
               key={next.uri}
               onClick={() => props.setSelectedRecipe(next)}
             >

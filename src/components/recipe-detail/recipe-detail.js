@@ -12,8 +12,8 @@ export const RecipeDetail = (props) => {
         ></img>
         <h3>{props.label}</h3>
         <h3>Ingredients : </h3>
-        {props.selectedRecipe.ingredients.map((next) => (
-          <p>{next.text}</p>
+        {props.selectedRecipe.ingredients.map((next, i) => (
+          <p key={i}>{next.text}</p>
         ))}
       </Stack>
     </div>
