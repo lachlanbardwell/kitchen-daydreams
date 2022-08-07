@@ -2,7 +2,7 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { useContext } from "react";
 import { FavContext } from "../../context";
-import { RecipeDetail } from "../recipe-detail/recipe-detail";
+// import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
@@ -10,6 +10,7 @@ import "./recipe-favourites.css";
 
 export const FavouritesList = () => {
   const { favouritedRecipes, removeFavouriteRecipe } = useContext(FavContext);
+  // const [rating, setRating] = useState()
 
   return (
     <div className="favourites-container">

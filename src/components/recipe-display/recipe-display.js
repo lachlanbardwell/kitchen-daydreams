@@ -54,6 +54,7 @@ export const RecipeDisplay = (props) => {
             <Grid item xs={6}>
               <img
                 src={next.image}
+                style={{ objectFit: "contain" }}
                 alt="individual recipe"
                 width="80%"
                 height="80%"

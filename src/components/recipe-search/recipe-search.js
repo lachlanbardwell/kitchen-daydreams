@@ -69,9 +69,10 @@ export const RecipeSearch = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container" data-testid="search-container">
       <div className="recipe-search">
         <TextField
+          inputProps={{ "data-testid": "input-search" }}
           color="success"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -132,7 +133,7 @@ export const RecipeSearch = () => {
         />
       )}
       {recipes.length !== 0 && (
-        <div className="recipe-sort-display">
+        <div className="recipe-sort-display" data-testid="search-display">
           <RecipeSort recipes={recipes} setRecipes={setRecipes} />
           <RecipeDisplay
             recipes={recipes}

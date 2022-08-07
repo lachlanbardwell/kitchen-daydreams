@@ -18,3 +18,5 @@ Pages - Home, Main search page, Favourites page, About/Contact page<br>
 Search -> Select filters -> Type item -> Show results -> Filter/sort results -> Click a recipe to view/favourite<br>
 Favourites -> Select recipe to enlarge -> Input to add comment -> Rate from 1-5 stars -> Sort list by rating -> Option to remove from favourites<br>
 About -> Basic information -> Input for contact message -> Button to submit message to email<br>
+
+Deployed with Heroku at https://infinite-depths-41827.herokuapp.com/

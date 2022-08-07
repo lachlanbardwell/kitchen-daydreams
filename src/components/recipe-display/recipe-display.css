@@ -3,3 +3,9 @@
   flex-direction: column;
   margin: 5% 20%;
 }
+
+@media only screen and (max-width: 1024px) {
+  .recipe-container {
+    margin: 1rem;
+  }
+}

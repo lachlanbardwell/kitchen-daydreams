@@ -7,12 +7,16 @@ import { ContactPage } from "./pages/contact-page/contact-page";
 import { Footer } from "./components/footer/footer";
 import { TopBar } from "./components/app-bar/app-bar";
 import { FavContext } from "./context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [favouritedRecipes, setFavouritedRecipes] = useState([]);
+  //Set local storage to retain favourites recipe state
+  useEffect(() => {
+    localStorage.setItem("Fav Recipes", JSON.stringify(favouritedRecipes));
+  }, [favouritedRecipes]);
 
-  const handleSelectFavRecipe = (nextFavourite) => {
+  const addFavouriteRecipe = (nextFavourite) => {
     setFavouritedRecipes((prevFavourites) => {
       if (prevFavourites.find((match) => match.uri === nextFavourite.uri)) {
         return prevFavourites;
@@ -21,7 +25,7 @@ const App = () => {
     });
   };
 
-  const handleRemoveFavRecipe = (nextFavourite) => {
+  const removeFavouriteRecipe = (nextFavourite) => {
     setFavouritedRecipes((prevFavourites) => {
       return prevFavourites.filter(
         (favourite) => favourite.uri !== nextFavourite.uri
@@ -34,8 +38,8 @@ const App = () => {
       <FavContext.Provider
         value={{
           favouritedRecipes,
-          addFavouriteRecipe: handleSelectFavRecipe,
-          removeFavouriteRecipe: handleRemoveFavRecipe,
+          addFavouriteRecipe,
+          removeFavouriteRecipe,
         }}
       >
         <BrowserRouter>
