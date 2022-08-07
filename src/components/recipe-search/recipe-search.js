@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import { CircularProgress } from "@material-ui/core";
 import HorizontalRuleRoundedIcon from "@mui/icons-material/HorizontalRuleRounded";
@@ -21,12 +21,31 @@ export const RecipeSearch = () => {
     "gluten-free": false,
   });
   const [selectedRecipe, setSelectedRecipe] = useState(null);
+  const [favouritedRecipes, setFavouritedRecipes] = useState([]);
+  const [recipeDetailFav, setRecipeDetailFav] = useState(false);
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState({
     empty: false,
     invalid: false,
     api: false,
   });
+
+  useEffect(() => {
+    favouritedRecipes.includes(selectedRecipe)
+      ? setRecipeDetailFav(true)
+      : setRecipeDetailFav(false);
+  }, [selectedRecipe, favouritedRecipes]);
+
+  const addFavouriteRecipe = (recipe) => {
+    !favouritedRecipes.includes(recipe) &&
+      setFavouritedRecipes((prev) => [...prev, recipe]);
+    setRecipeDetailFav(true);
+  };
+
+  const removeFavouriteRecipe = (recipe) => {
+    setFavouritedRecipes((prev) => prev.filter((match) => match !== recipe));
+    setRecipeDetailFav(false);
+  };
 
   const getRecipes = () => {
     if (!searchTerm) {
@@ -55,7 +74,7 @@ export const RecipeSearch = () => {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <div className="recipe-search">
         <TextField
           value={searchTerm}
@@ -107,7 +126,16 @@ export const RecipeSearch = () => {
           setSelectedRecipe={setSelectedRecipe}
         />
       )}
-      {selectedRecipe && <RecipeDetail selectedRecipe={selectedRecipe} />}
+      {selectedRecipe && (
+        <RecipeDetail
+          selectedRecipe={selectedRecipe}
+          setSelectedRecipe={setSelectedRecipe}
+          recipeDetailFav={recipeDetailFav}
+          setRecipeDetailFav={setRecipeDetailFav}
+          addFavouriteRecipe={(recipe) => addFavouriteRecipe(recipe)}
+          removeFavouriteRecipe={(recipe) => removeFavouriteRecipe(recipe)}
+        />
+      )}
     </div>
   );
 };

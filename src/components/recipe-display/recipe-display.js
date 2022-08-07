@@ -46,7 +46,7 @@ export const RecipeDisplay = (props) => {
                   <h4>Time to make: {next.totalTime} minutes</h4>
                 )}
                 <p>
-                  Energy: {Math.round(next.calories)} cal (
+                  Energy: {Math.round(next.calories)} kcal (
                   {Math.round(next.calories * 4.184)}kj)
                 </p>{" "}
                 <br />
