@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import { CircularProgress } from "@material-ui/core";
+import HorizontalRuleRoundedIcon from "@mui/icons-material/HorizontalRuleRounded";
 import { RecipeDisplay } from "../recipe-display/recipe-display";
 import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import { RecipeFilter } from "../recipe-filter/recipe-filter";
@@ -43,8 +44,8 @@ export const RecipeSearch = () => {
       .then((response) => {
         setRecipes(response.data.hits.map((next) => next.recipe));
         setLoading(false);
-        //TODO: Error handle janky
-        !recipes.length && setSearchError({ invalid: true });
+        // //TODO: Error handle janky
+        // !recipes.length && setSearchError({ invalid: true });
       })
       .catch((error) => {
         console.error(error);
@@ -69,6 +70,17 @@ export const RecipeSearch = () => {
           setCheckedState={setCheckedState}
           healthFilter={healthFilter}
           setHealthFilter={setHealthFilter}
+        />
+        <HorizontalRuleRoundedIcon
+          color="primary"
+          preserveAspectRatio="none"
+          style={{
+            margin: "auto",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "60px",
+            width: "100%",
+          }}
         />
       </div>
       {searchError.empty && (
@@ -95,7 +107,6 @@ export const RecipeSearch = () => {
           setSelectedRecipe={setSelectedRecipe}
         />
       )}
-
       {selectedRecipe && <RecipeDetail selectedRecipe={selectedRecipe} />}
     </div>
   );

@@ -1,4 +1,5 @@
 import { Grid, Alert } from "@mui/material";
+import BlenderRoundedIcon from "@mui/icons-material/BlenderRounded";
 import "./recipe-display.css";
 
 export const RecipeDisplay = (props) => {
@@ -7,6 +8,15 @@ export const RecipeDisplay = (props) => {
   };
   const checkVegetarian = (array) => {
     return array.find((match) => match === "Vegetarian") ? true : false;
+  };
+
+  const hoverStyles = {
+    "&:hover": {
+      cursor: "pointer",
+      background: "#f0f0f0",
+      borderRadius: "15px",
+      transition: ".5s",
+    },
   };
 
   return (
@@ -18,10 +28,8 @@ export const RecipeDisplay = (props) => {
               container
               spacing={2}
               columnSpacing={8}
-              border="solid 1px black"
-              padding="30px"
-              // onMouseEnter={() => console.log("here")}
-              // onMouseLeave={() => console.log("leave")}
+              padding="10px"
+              sx={hoverStyles}
               key={next.uri}
               onClick={() => props.setSelectedRecipe(next)}
             >
@@ -34,7 +42,15 @@ export const RecipeDisplay = (props) => {
                   <Alert severity="success">Vegetarian friendly!</Alert>
                 )}
                 <h4>{next.dietLabels[0]}</h4>
-                <p>Calories: {Math.round(next.calories)}</p>{" "}
+                {next.totalTime !== 0 && (
+                  <h4>Time to make: {next.totalTime} minutes</h4>
+                )}
+                <p>
+                  Energy: {Math.round(next.calories)} cal (
+                  {Math.round(next.calories * 4.184)}kj)
+                </p>{" "}
+                <br />
+                <BlenderRoundedIcon />
               </Grid>
               <Grid item xs={6}>
                 <img
