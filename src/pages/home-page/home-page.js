@@ -5,7 +5,7 @@ export const HomePage = () => {
   return (
     <div className="home-container">
       <div className="home-banner">
-        <h1>Lachlan's Kitchen Daydreams</h1>
+        <h1>Kitchen Daydreams</h1>
       </div>
       <h2>
         Recipes from <i>successful</i> restaurants

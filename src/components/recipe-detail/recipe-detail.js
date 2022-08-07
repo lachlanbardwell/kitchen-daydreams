@@ -143,7 +143,7 @@ export const RecipeDetail = (props) => {
             <Button
               sx={{
                 color: "white",
-                backgroundColor: "#001302",
+                backgroundColor: "#011a07",
                 "&:hover": {
                   backgroundColor: "white",
                   color: "black",

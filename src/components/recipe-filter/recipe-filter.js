@@ -33,6 +33,11 @@ export const RecipeFilter = (props) => {
                   label={next}
                   control={
                     <Checkbox
+                      sx={{
+                        "&.Mui-checked": {
+                          color: "#011a07",
+                        },
+                      }}
                       checked={props.checkedState[i]}
                       name={filterNames[i]}
                       onChange={setFilters}

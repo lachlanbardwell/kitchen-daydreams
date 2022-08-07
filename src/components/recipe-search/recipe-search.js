@@ -7,6 +7,7 @@ import { RecipeDisplay } from "../recipe-display/recipe-display";
 import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import { RecipeFilter } from "../recipe-filter/recipe-filter";
 import "./recipe-search.css";
+import { RecipeSort } from "../recipe-sort/recipe-sort";
 
 const EDAMAM_API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
 
@@ -29,6 +30,14 @@ export const RecipeSearch = () => {
     invalid: false,
     api: false,
   });
+
+  //Works but flashes error still on longer calls and settimeout not ideal?
+  //needs a ref to not load on intial
+  // useEffect(() => {
+  //   recipes.length === 0
+  //     ? setTimeout(() => setSearchError({ invalid: true }), 1000)
+  //     : setSearchError({ invalid: false });
+  // }, [recipes.length]);
 
   useEffect(() => {
     favouritedRecipes.includes(selectedRecipe)
@@ -53,6 +62,8 @@ export const RecipeSearch = () => {
       return;
     }
     setSearchError({ empty: false });
+    setSearchError({ invalid: false });
+    setSearchError({ api: false });
     setLoading(true);
     setRecipes([]);
     const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerm}&app_id=a24fefc8&app_key=${EDAMAM_API_KEY}${healthFilter.join(
@@ -63,9 +74,13 @@ export const RecipeSearch = () => {
       .then((response) => {
         setRecipes(response.data.hits.map((next) => next.recipe));
         setLoading(false);
-        // //TODO: Error handle janky
-        // !recipes.length && setSearchError({ invalid: true });
       })
+      // // Still janky
+      // .then(() =>
+      //   recipes.length === 0
+      //     ? setSearchError({ invalid: true })
+      //     : setSearchError({ invalid: false })
+      // )
       .catch((error) => {
         console.error(error);
         setLoading(false);
@@ -77,11 +92,23 @@ export const RecipeSearch = () => {
     <div className="main-container">
       <div className="recipe-search">
         <TextField
+          color="success"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="What would you like to make?"
         ></TextField>
-        <Button onClick={getRecipes} variant="contained">
+        <Button
+          sx={{
+            color: "white",
+            backgroundColor: "#011a07",
+            "&:hover": {
+              backgroundColor: "white",
+              color: "black",
+            },
+          }}
+          onClick={getRecipes}
+          variant="contained"
+        >
           Search
         </Button>{" "}
         <RecipeFilter
@@ -91,7 +118,7 @@ export const RecipeSearch = () => {
           setHealthFilter={setHealthFilter}
         />
         <HorizontalRuleRoundedIcon
-          color="primary"
+          color="success"
           preserveAspectRatio="none"
           style={{
             margin: "auto",
@@ -103,28 +130,36 @@ export const RecipeSearch = () => {
         />
       </div>
       {searchError.empty && (
-        <Alert severity="error">Enter an item to search</Alert>
+        <Alert severity="error" style={{ margin: "0 20% 0 20%" }}>
+          Enter an item to search
+        </Alert>
       )}
-      {searchError.invalid && (
-        <Alert severity="error">
+      {searchError.invalid && !loading && (
+        <Alert severity="error" style={{ margin: "0 20% 0 20%" }}>
           Could not find any recipes with that name
         </Alert>
       )}
-      {searchError.fetch && (
-        <Alert severity="error">There was a problem retrieving data.</Alert>
+      {searchError.fetch && !loading && (
+        <Alert severity="error" style={{ margin: "0 20% 0 20%" }}>
+          There was a problem retrieving data.
+        </Alert>
       )}
 
-      {loading ? (
+      {loading && (
         <CircularProgress
           size={60}
-          style={{ marginTop: "5%", marginLeft: "50%", color: "black" }}
+          style={{ marginLeft: "50%", color: "black" }}
         />
-      ) : (
-        <RecipeDisplay
-          recipes={recipes}
-          selectedRecipe={selectedRecipe}
-          setSelectedRecipe={setSelectedRecipe}
-        />
+      )}
+      {recipes.length !== 0 && (
+        <div className="recipe-sort-display">
+          <RecipeSort recipes={recipes} setRecipes={setRecipes} />
+          <RecipeDisplay
+            recipes={recipes}
+            selectedRecipe={selectedRecipe}
+            setSelectedRecipe={setSelectedRecipe}
+          />
+        </div>
       )}
       {selectedRecipe && (
         <RecipeDetail

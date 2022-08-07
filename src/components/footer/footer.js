@@ -4,7 +4,6 @@ import linkedin from "../../images/linkedin-black.svg";
 import twitter from "../../images/twitter-black.svg";
 import youtube from "../../images/youtube-black.svg";
 import { Stack } from "@mui/material";
-import { Link } from "react-router-dom";
 import "./footer.css";
 
 const socialImages = [facebook, instagram, linkedin, twitter, youtube];
@@ -12,16 +11,6 @@ const socialImages = [facebook, instagram, linkedin, twitter, youtube];
 export const Footer = () => {
   return (
     <footer>
-      <Link
-        to={"/contact"}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          textDecoration: "none",
-        }}
-      >
-        <h2>Tell us what you think!</h2>
-      </Link>
       <nav className="social">
         <Stack
           direction="row"
