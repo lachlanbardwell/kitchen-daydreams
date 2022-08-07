@@ -14,7 +14,15 @@ export const FavouritesList = () => {
   return (
     <div className="favourites-container">
       {favouritedRecipes && (
-        <ImageList sx={{ width: 600, height: 550 }} cols={3} rowHeight={200}>
+        <ImageList
+          sx={{
+            margin: "auto",
+            width: 600,
+            height: 550,
+          }}
+          cols={3}
+          rowHeight={200}
+        >
           {favouritedRecipes.map((item) => (
             <div key={item.uri}>
               <Tooltip title={item.label}>

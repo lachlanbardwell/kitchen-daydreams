@@ -38,21 +38,14 @@ export const RecipeDetail = (props) => {
       >
         <Stack direction="row" spacing={2} style={{ alignItems: "center" }}>
           <h2>{props.selectedRecipe.label}</h2>
-          {props.selectedRecipe.totalTime !== 0 ? (
-            <span style={{ display: "flex" }}>
-              <AccessTimeRoundedIcon
-                style={{ alignItems: "center", marginRight: "5px" }}
-              />
-              {props.selectedRecipe.totalTime} minutes
-            </span>
-          ) : (
-            <span style={{ display: "flex" }}>
-              <AccessTimeRoundedIcon
-                style={{ alignItems: "center", marginRight: "5px" }}
-              />
-              Cooking time unavailable
-            </span>
-          )}
+          <span style={{ display: "flex" }}>
+            <AccessTimeRoundedIcon
+              style={{ alignItems: "center", marginRight: "5px" }}
+            />
+            {props.selectedRecipe.totalTime !== 0
+              ? `${props.selectedRecipe.totalTime} minutes`
+              : "Cooking time unavailable"}
+          </span>
         </Stack>
         <Stack
           direction="row"

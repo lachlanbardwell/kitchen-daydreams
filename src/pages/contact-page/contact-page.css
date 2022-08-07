@@ -1,0 +1,5 @@
+.contact-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
