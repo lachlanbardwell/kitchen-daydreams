@@ -22,47 +22,45 @@ export const RecipeDisplay = (props) => {
   return (
     <div className="recipe-container">
       {props.recipes &&
-        props.recipes.map((next) => {
-          return (
-            <Grid
-              container
-              spacing={2}
-              columnSpacing={8}
-              padding="10px"
-              sx={hoverStyles}
-              key={next.uri}
-              onClick={() => props.setSelectedRecipe(next)}
-            >
-              <Grid item xs={6}>
-                <h2>{next.label}</h2>
-                {checkVegan(next.healthLabels) && (
-                  <Alert severity="success">Vegan friendly!</Alert>
-                )}
-                {checkVegetarian(next.healthLabels) && (
-                  <Alert severity="success">Vegetarian friendly!</Alert>
-                )}
-                <h4>{next.dietLabels[0]}</h4>
-                {next.totalTime !== 0 && (
-                  <h4>Time to make: {next.totalTime} minutes</h4>
-                )}
-                <p>
-                  Energy: {Math.round(next.calories)} kcal (
-                  {Math.round(next.calories * 4.184)}kj)
-                </p>{" "}
-                <br />
-                <BlenderRoundedIcon />
-              </Grid>
-              <Grid item xs={6}>
-                <img
-                  src={next.image}
-                  alt="individual recipe"
-                  width="80%"
-                  height="80%"
-                ></img>
-              </Grid>
+        props.recipes.map((next) => (
+          <Grid
+            container
+            spacing={2}
+            columnSpacing={8}
+            padding="10px"
+            sx={hoverStyles}
+            key={next.uri}
+            onClick={() => props.setSelectedRecipe(next)}
+          >
+            <Grid item xs={6}>
+              <h2>{next.label}</h2>
+              {checkVegan(next.healthLabels) && (
+                <Alert severity="success">Vegan friendly!</Alert>
+              )}
+              {checkVegetarian(next.healthLabels) && (
+                <Alert severity="success">Vegetarian friendly!</Alert>
+              )}
+              <h4>{next.dietLabels[0]}</h4>
+              {next.totalTime !== 0 && (
+                <h4>Time to make: {next.totalTime} minutes</h4>
+              )}
+              <p>
+                Energy: {Math.round(next.calories)} kcal (
+                {Math.round(next.calories * 4.184)}kj)
+              </p>
+              <br />
+              <BlenderRoundedIcon />
             </Grid>
-          );
-        })}
+            <Grid item xs={6}>
+              <img
+                src={next.image}
+                alt="individual recipe"
+                width="80%"
+                height="80%"
+              ></img>
+            </Grid>
+          </Grid>
+        ))}
     </div>
   );
 };

@@ -1,5 +1,7 @@
 import { Stack, Grid, Button } from "@mui/material";
 import { yellow } from "@mui/material/colors";
+import { useContext } from "react";
+import { FavContext } from "../../context";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
@@ -12,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./recipe-detail.css";
 
 export const RecipeDetail = (props) => {
+  const { addFavouriteRecipe, removeFavouriteRecipe } = useContext(FavContext);
   return (
     <div
       className="recipe-detail-modal"
@@ -37,7 +40,6 @@ export const RecipeDetail = (props) => {
           <h2>{props.selectedRecipe.label}</h2>
           {props.selectedRecipe.totalTime !== 0 ? (
             <span style={{ display: "flex" }}>
-              {" "}
               <AccessTimeRoundedIcon
                 style={{ alignItems: "center", marginRight: "5px" }}
               />
@@ -45,7 +47,6 @@ export const RecipeDetail = (props) => {
             </span>
           ) : (
             <span style={{ display: "flex" }}>
-              {" "}
               <AccessTimeRoundedIcon
                 style={{ alignItems: "center", marginRight: "5px" }}
               />
@@ -66,16 +67,12 @@ export const RecipeDetail = (props) => {
           ></img>
           <Stack style={{ marginLeft: "50%" }}>
             {!props.recipeDetailFav ? (
-              <Button
-                onClick={() => props.addFavouriteRecipe(props.selectedRecipe)}
-              >
+              <Button onClick={() => addFavouriteRecipe(props.selectedRecipe)}>
                 <StarBorderRoundedIcon sx={{ color: "black", fontSize: 80 }} />
               </Button>
             ) : (
               <Button
-                onClick={() =>
-                  props.removeFavouriteRecipe(props.selectedRecipe)
-                }
+                onClick={() => removeFavouriteRecipe(props.selectedRecipe)}
               >
                 <StarRoundedIcon sx={{ color: yellow[500], fontSize: 80 }} />
               </Button>
@@ -105,18 +102,14 @@ export const RecipeDetail = (props) => {
             <h3>Nutrients:</h3>
             <h4 style={{ alignItems: "center" }}>
               <FitnessCenterIcon />
-              {"  "}
-              {Math.round(
-                props.selectedRecipe.totalNutrients.PROCNT.quantity
-              )}{" "}
+              {Math.round(props.selectedRecipe.totalNutrients.PROCNT.quantity)}
               grams
             </h4>
             <h4>
               <RamenDiningIcon />
-              {"  "}
               {Math.round(
                 props.selectedRecipe.totalNutrients.ENERC_KCAL.quantity
-              )}{" "}
+              )}
               kcal (
               {Math.round(
                 props.selectedRecipe.totalNutrients.ENERC_KCAL.quantity * 4.184
@@ -125,18 +118,12 @@ export const RecipeDetail = (props) => {
             </h4>
             <h4>
               <AccessibilityIcon />
-              {"  "}
-              {Math.round(
-                props.selectedRecipe.totalNutrients.FAT.quantity
-              )}{" "}
+              {Math.round(props.selectedRecipe.totalNutrients.FAT.quantity)}
               grams
             </h4>
             <h4>
               <IcecreamIcon />
-              {"  "}
-              {Math.round(
-                props.selectedRecipe.totalNutrients.SUGAR.quantity
-              )}{" "}
+              {Math.round(props.selectedRecipe.totalNutrients.SUGAR.quantity)}
               grams
             </h4>
             <br />

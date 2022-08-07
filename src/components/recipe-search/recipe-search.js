@@ -1,13 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import { CircularProgress } from "@material-ui/core";
 import HorizontalRuleRoundedIcon from "@mui/icons-material/HorizontalRuleRounded";
 import { RecipeDisplay } from "../recipe-display/recipe-display";
 import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import { RecipeFilter } from "../recipe-filter/recipe-filter";
-import "./recipe-search.css";
 import { RecipeSort } from "../recipe-sort/recipe-sort";
+import { FavContext } from "../../context";
+import "./recipe-search.css";
 
 const EDAMAM_API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;
 
@@ -22,7 +23,6 @@ export const RecipeSearch = () => {
     "gluten-free": false,
   });
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [favouritedRecipes, setFavouritedRecipes] = useState([]);
   const [recipeDetailFav, setRecipeDetailFav] = useState(false);
   const [loading, setLoading] = useState(false);
   const [searchError, setSearchError] = useState({
@@ -30,31 +30,13 @@ export const RecipeSearch = () => {
     invalid: false,
     api: false,
   });
-
-  //Works but flashes error still on longer calls and settimeout not ideal?
-  //needs a ref to not load on intial
-  // useEffect(() => {
-  //   recipes.length === 0
-  //     ? setTimeout(() => setSearchError({ invalid: true }), 1000)
-  //     : setSearchError({ invalid: false });
-  // }, [recipes.length]);
+  const { favouritedRecipes } = useContext(FavContext);
 
   useEffect(() => {
     favouritedRecipes.includes(selectedRecipe)
       ? setRecipeDetailFav(true)
       : setRecipeDetailFav(false);
   }, [selectedRecipe, favouritedRecipes]);
-
-  const addFavouriteRecipe = (recipe) => {
-    !favouritedRecipes.includes(recipe) &&
-      setFavouritedRecipes((prev) => [...prev, recipe]);
-    setRecipeDetailFav(true);
-  };
-
-  const removeFavouriteRecipe = (recipe) => {
-    setFavouritedRecipes((prev) => prev.filter((match) => match !== recipe));
-    setRecipeDetailFav(false);
-  };
 
   const getRecipes = () => {
     if (!searchTerm) {
@@ -72,15 +54,13 @@ export const RecipeSearch = () => {
     axios
       .get(url)
       .then((response) => {
-        setRecipes(response.data.hits.map((next) => next.recipe));
+        let results = response.data.hits.map((next) => next.recipe);
+        setRecipes(results);
         setLoading(false);
+        results.length === 0
+          ? setSearchError({ invalid: true })
+          : setSearchError({ invalid: false });
       })
-      // // Still janky
-      // .then(() =>
-      //   recipes.length === 0
-      //     ? setSearchError({ invalid: true })
-      //     : setSearchError({ invalid: false })
-      // )
       .catch((error) => {
         console.error(error);
         setLoading(false);
@@ -110,7 +90,7 @@ export const RecipeSearch = () => {
           variant="contained"
         >
           Search
-        </Button>{" "}
+        </Button>
         <RecipeFilter
           checkedState={checkedState}
           setCheckedState={setCheckedState}
@@ -167,8 +147,6 @@ export const RecipeSearch = () => {
           setSelectedRecipe={setSelectedRecipe}
           recipeDetailFav={recipeDetailFav}
           setRecipeDetailFav={setRecipeDetailFav}
-          addFavouriteRecipe={(recipe) => addFavouriteRecipe(recipe)}
-          removeFavouriteRecipe={(recipe) => removeFavouriteRecipe(recipe)}
         />
       )}
     </div>

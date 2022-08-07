@@ -9,7 +9,6 @@ An app for easily searching dishes to make and displaying the recipe and ingredi
 Search for a dish and recieve information<br>
 Shows at least picture, ingredients, total calories<br>
 Can search for vegetarian/vegan options, dairy and gluten free<br>
-Can filter results by the same<br>
 Can sort results alphabetically, by time to make, total calories<br>
 Can favourite the selected dish to view in a list, and add a rating + comment/annotation if desired<br>
 
