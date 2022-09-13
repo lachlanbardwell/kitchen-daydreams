@@ -1,8 +1,8 @@
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FavContext } from "../../context";
-// import { RecipeDetail } from "../recipe-detail/recipe-detail";
+import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
@@ -10,6 +10,7 @@ import "./recipe-favourites.css";
 
 export const FavouritesList = () => {
   const { favouritedRecipes, removeFavouriteRecipe } = useContext(FavContext);
+  const [favClicked, setFavClicked] = useState(null);
   // const [rating, setRating] = useState()
 
   return (
@@ -25,9 +26,15 @@ export const FavouritesList = () => {
           rowHeight={200}
         >
           {favouritedRecipes.map((item) => (
-            <div key={item.uri}>
+            <div key={item.uri} onClick={() => setFavClicked(item)}>
               <Tooltip title={item.label}>
-                <ImageListItem>
+                <ImageListItem
+                  sx={{
+                    "&:hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                >
                   <img src={item.image} alt={item.label} loading="lazy" />
                 </ImageListItem>
               </Tooltip>
@@ -40,6 +47,13 @@ export const FavouritesList = () => {
                   />
                 </IconButton>
               </Tooltip>
+              {favClicked && (
+                <RecipeDetail
+                  selectedRecipe={favClicked}
+                  setSelectedRecipe={setFavClicked}
+                  recipeDetailFav={true}
+                />
+              )}
             </div>
           ))}
         </ImageList>
