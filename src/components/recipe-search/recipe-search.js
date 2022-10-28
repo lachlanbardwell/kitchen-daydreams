@@ -129,7 +129,7 @@ export const RecipeSearch = () => {
       {loading && (
         <CircularProgress
           size={60}
-          style={{ marginLeft: "50%", color: "black" }}
+          style={{ marginLeft: "48%", color: "black" }}
         />
       )}
       {recipes.length !== 0 && (

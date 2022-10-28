@@ -1,5 +1,10 @@
 .recipe-sort {
   display: flex;
-  justify-content: space-between;
-  margin: 5% 25%;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 750px) {
+  .recipe-sort {
+    flex-direction: column;
+  }
 }

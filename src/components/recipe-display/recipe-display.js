@@ -27,7 +27,6 @@ export const RecipeDisplay = (props) => {
             container
             spacing={2}
             columnSpacing={8}
-            padding="10px"
             sx={hoverStyles}
             key={next.uri}
             onClick={() => props.setSelectedRecipe(next)}
@@ -48,7 +47,6 @@ export const RecipeDisplay = (props) => {
                 Energy: {Math.round(next.calories)} kcal (
                 {Math.round(next.calories * 4.184)}kj)
               </p>
-              <br />
               <BlenderRoundedIcon />
             </Grid>
             <Grid item xs={6}>

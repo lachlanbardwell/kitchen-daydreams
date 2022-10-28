@@ -55,10 +55,11 @@ export const RecipeDetail = (props) => {
           <img
             src={props.selectedRecipe.image}
             alt="individual recipe"
-            width="150"
-            height="150"
+            className="individual-image"
+            height="120"
+            width="120"
           ></img>
-          <Stack style={{ marginLeft: "50%" }}>
+          <div className="inner-image">
             {!props.recipeDetailFav ? (
               <Button onClick={() => addFavouriteRecipe(props.selectedRecipe)}>
                 <StarBorderRoundedIcon sx={{ color: "black", fontSize: 80 }} />
@@ -70,7 +71,7 @@ export const RecipeDetail = (props) => {
                 <StarRoundedIcon sx={{ color: yellow[500], fontSize: 80 }} />
               </Button>
             )}
-          </Stack>
+          </div>
         </Stack>
         <HorizontalRuleRoundedIcon
           color="success"
@@ -78,21 +79,25 @@ export const RecipeDetail = (props) => {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            height: "40px",
+            height: "30px",
             width: "100%",
           }}
         />
         <Grid container spacing={2} style={{ margin: "0 0 0 20%" }}>
-          <Grid item xs={6}>
-            <h3>Ingredients ({props.selectedRecipe.yield} Servings): </h3>
+          <Grid item xs={6} style={{ padding: 0 }}>
+            <h3 style={{ margin: 0 }} className="recipe-ing">
+              Ingredients ({props.selectedRecipe.yield} Servings):
+            </h3>
             <div style={{ columns: "2 auto", lineHeight: 0.9 }}>
               {props.selectedRecipe.ingredients.map((next, i) => (
-                <p key={i}>{next.text}</p>
+                <p key={i} className="recipe-desc">
+                  {next.text}
+                </p>
               ))}
             </div>
           </Grid>
-          <Grid item xs={6}>
-            <h3>Nutrients:</h3>
+          <Grid item xs={6} style={{ padding: 0 }} className="recipe-ing">
+            <h3 style={{ margin: 0 }}>Nutrients:</h3>
             <h4 style={{ alignItems: "center" }}>
               <FitnessCenterIcon />
               {Math.round(props.selectedRecipe.totalNutrients.PROCNT.quantity)}

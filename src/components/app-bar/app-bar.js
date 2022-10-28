@@ -10,6 +10,7 @@ import {
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrowSharp";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./app-bar.css";
 
 export const TopBar = () => {
   const [visible, setVisible] = useState(false);
@@ -36,16 +37,17 @@ export const TopBar = () => {
         <Toolbar
           style={{
             display: "flex",
+            padding: "0 10px",
             justifyContent: "space-between",
             fontFamily: "Play, sans-serif",
           }}
         >
-          <Stack direction="row">
+          <Stack direction="row" className="recipe-nav">
             <Link to={"/recipes"} style={linkItem}>
-              <h3>Search Recipes |</h3>
+              <h3>Search&nbsp;|&nbsp;</h3>
             </Link>
             <Link to={"/favourites"} style={linkItem}>
-              <h3>&nbsp;Favourites |</h3>
+              <h3>Favourites&nbsp;|</h3>
             </Link>
 
             <Link to={"/contact"} style={linkItem}>
@@ -58,12 +60,13 @@ export const TopBar = () => {
               color: "black",
               textDecoration: "none",
               marginRight: "14%",
+              marginLeft: "5%",
             }}
           >
-            <h2>Kitchen Daydreams</h2>
+            <h2 className="app-title">Kitchen Daydreams</h2>
           </Link>
           <div style={{ display: "flex" }}>
-            <h4 style={{ color: "##2b2b2b" }}>Other projects</h4>
+            <h4 className="other-links">Other projects</h4>
             <IconButton
               id="anchor"
               aria-controls="basic-menu"

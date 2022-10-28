@@ -39,7 +39,7 @@ export const RecipeSort = (props) => {
               props.setRecipes(sortAlpha());
             }}
           >
-            Alphabetically
+            Alphabetically&nbsp;
           </Button>
           <Button
             color="success"

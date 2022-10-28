@@ -1,0 +1,13 @@
+@media (max-width: 750px) {
+  h2 {
+    font-size: 15px;
+  }
+
+  .other-links {
+    font-size: 12px;
+  }
+
+  .recipe-nav {
+    font-size: 9px;
+  }
+}

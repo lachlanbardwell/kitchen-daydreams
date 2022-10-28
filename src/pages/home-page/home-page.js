@@ -32,7 +32,7 @@ export const HomePage = () => {
           textDecoration: "none",
         }}
       >
-        <h2>Click here to search for a recipe</h2>
+        <h2>Search for a recipe</h2>
       </Link>
     </div>
   );
