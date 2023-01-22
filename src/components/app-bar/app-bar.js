@@ -66,7 +66,12 @@ export const TopBar = () => {
             <h2 className="app-title">Kitchen Daydreams</h2>
           </Link>
           <div style={{ display: "flex" }}>
-            <h4 className="other-links">Other projects</h4>
+            <a
+              href="https://lachieb.dev"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <h4 className="other-links">LachieB.dev</h4>
+            </a>
             <IconButton
               id="anchor"
               aria-controls="basic-menu"
@@ -80,29 +85,24 @@ export const TopBar = () => {
                 onClose={() => setVisible(false)}
                 style={{ padding: 20 }}
               >
-                <MenuItem
-                  onClick={() =>
-                    window.open("https://shoppinglist.lachieb.dev")
-                  }
+                <a
+                  href="https://shoppinglist.lachieb.dev"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
-                  Shopping List
-                </MenuItem>
-                <MenuItem
-                  onClick={() => window.open("https://xando.lachieb.dev")}
+                  <MenuItem>Shopping List</MenuItem>
+                </a>
+                <a
+                  href="https://xando.lachieb.dev"
+                  style={{ textDecoration: "none", color: "black" }}
                 >
-                  Naughts and Crosses
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    to={"/"}
-                    style={{
-                      color: "black",
-                      textDecoration: "none",
-                    }}
-                  >
-                    Kitchen Daydreams
-                  </Link>
-                </MenuItem>
+                  <MenuItem>Naughts and Crosses</MenuItem>
+                </a>
+                <a
+                  href="https://kitchen.lachieb.dev"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem>Kitchen Daydreams</MenuItem>
+                </a>
               </Menu>
               <DoubleArrowIcon />
             </IconButton>
