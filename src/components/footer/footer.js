@@ -48,7 +48,7 @@ export const Footer = () => {
           justifyContent: "center",
         }}
       >
-        &copy; Lachlan Bardwell 2022
+        &copy; Lachlan Bardwell 2023
       </h4>
     </footer>
   );
