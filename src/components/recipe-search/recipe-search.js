@@ -2,12 +2,12 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { TextField, Button, Alert } from "@mui/material";
 import { CircularProgress } from "@material-ui/core";
-import HorizontalRuleRoundedIcon from "@mui/icons-material/HorizontalRuleRounded";
 import { RecipeDisplay } from "../recipe-display/recipe-display";
 import { RecipeDetail } from "../recipe-detail/recipe-detail";
 import { RecipeFilter } from "../recipe-filter/recipe-filter";
 import { RecipeSort } from "../recipe-sort/recipe-sort";
 import { FavContext } from "../../context";
+import HorizontalRuleRoundedIcon from "@mui/icons-material/HorizontalRuleRounded";
 import "./recipe-search.css";
 
 const EDAMAM_API_KEY = process.env.REACT_APP_EDAMAM_API_KEY;

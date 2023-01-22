@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [favouritedRecipes, setFavouritedRecipes] = useState([]);
   //Set local storage to retain favourites recipe state
-  //Test
   useEffect(() => {
     localStorage.setItem("Fav Recipes", JSON.stringify(favouritedRecipes));
   }, [favouritedRecipes]);
